@@ -1,0 +1,5 @@
+#!/bin/bash
+
+/usr/bin/rconcli \
+    --properties "${PROPERTIES_LOCATION:-/var/mcserver/server.properties}" \
+    $@
