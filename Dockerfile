@@ -24,7 +24,7 @@ RUN cargo build --release
 
 # --- FINAL IMAGE STAGE ----------------------------------------------------------------------------
 
-FROM openjdk:${JDK_VERSION}-jdk-bullseye AS final
+FROM "${JDK_BASE_IMAGE}" AS final
 
 LABEL maintainer="zekro <contact@zekro.de>" \
     version="1" \

@@ -1,8 +1,6 @@
 name: Docker Autobuild
 on:
   workflow_dispatch:
-  # schedule:
-  #     - cron: "0 0 1 * *"
   push:
     branches:
       - "main"
@@ -16,11 +14,14 @@ jobs:
     strategy:
       matrix:
         jdkversion:
-          - "8"
-          - "11"
-          - "16"
-          - "17"
-          - "21"
+          - [openjdk:8-jdk-bullseye, jdk-8]
+          - [openjdk:11-jdk-bullseye, jdk-11]
+          - [openjdk:16-jdk-bullseye, jdk-16]
+          - [openjdk:17-jdk-bullseye, jdk-17]
+          - [openjdk:21-jdk-bullseye, jdk-21]
+          - [azul/zulu-openjdk-debian:17-latest, zulu:17]
+          - [azul/zulu-openjdk-debian:21-latest, zulu:21]
+          - [azul/zulu-openjdk-debian:22-latest, zulu:22]
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -39,6 +40,6 @@ jobs:
           push: true
           no-cache: true
           build-args: |-
-            JDK_VERSION=${{ matrix.jdkversion }}
+            JDK_VERSION=${{ matrix.jdkversion[0] }}
           tags: |-
-            ghcr.io/${{ env.REPO }}:jdk-${{ matrix.jdkversion }}
+            ghcr.io/${{ env.REPO }}:${{ matrix.jdkversion[1] }}
