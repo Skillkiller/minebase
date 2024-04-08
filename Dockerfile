@@ -1,4 +1,4 @@
-ARG JDK_VERSION="17"
+ARG JDK_BASE_IMAGE="openjdk:21-jdk-bullseye"
 ARG RUST_VERSION_TAG="1-buster"
 ARG GOLANG_VERSION_TAG="1-bookworm"
 
@@ -24,7 +24,7 @@ RUN cargo build --release
 
 # --- FINAL IMAGE STAGE ----------------------------------------------------------------------------
 
-FROM "${JDK_BASE_IMAGE}" AS final
+FROM ${JDK_BASE_IMAGE} AS final
 
 LABEL maintainer="zekro <contact@zekro.de>" \
     version="1" \
