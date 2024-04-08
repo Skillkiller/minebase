@@ -11,11 +11,18 @@ This is a batteries-included Docker base image you can use to create your own Mi
 ## How to build the image?
 
 Simply use the image `ghcr.io/zekrotja/minebase` as base image. You can choose between different JDK versions via the tag of the image. Available tags are:
+
+### OpenJDK ([hub.docker.com/openjdk](https://hub.docker.com/_/openjdk))
 - `jdk-21`
 - `jdk-17`
 - `jdk-16`
 - `jdk-11`
 - `jdk-8`
+
+### Azul Zulu OpenJDK ([hub.docker.com/azul/zulu-openjdk-debian](https://hub.docker.com/r/azul/zulu-openjdk-debian))
+- `zulu-17`
+- `zulu-21`
+- `zulu-22`
 
 Then, you need to create a `run.sh`, which contains the script to start the Minecraft server. It must be placed in the `/var/mcserver/scripts` directory of the image.
 
