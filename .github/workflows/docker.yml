@@ -1,4 +1,5 @@
 name: Docker Autobuild
+
 on:
   workflow_dispatch:
   push:
@@ -13,15 +14,23 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        jdkversion:
-          - [openjdk:8-jdk-bullseye, jdk-8]
-          - [openjdk:11-jdk-bullseye, jdk-11]
-          - [openjdk:16-jdk-bullseye, jdk-16]
-          - [openjdk:17-jdk-bullseye, jdk-17]
-          - [openjdk:21-jdk-bullseye, jdk-21]
-          - [azul/zulu-openjdk-debian:17-latest, zulu:17]
-          - [azul/zulu-openjdk-debian:21-latest, zulu:21]
-          - [azul/zulu-openjdk-debian:22-latest, zulu:22]
+        jdk:
+          - image: "openjdk:8-jdk-bullseye"
+            tag: jdk-8
+          - image: "openjdk:11-jdk-bullseye"
+            tag: jdk-11
+          - image: "openjdk:16-jdk-bullseye"
+            tag: jdk-16
+          - image: "openjdk:17-jdk-bullseye"
+            tag: jdk-17
+          - image: "openjdk:21-jdk-bullseye"
+            tag: jdk-21
+          - image: "azul/zulu-openjdk-debian:17-latest"
+            tag: zulu-17
+          - image: "azul/zulu-openjdk-debian:21-latest"
+            tag: zulu-21
+          - image: "azul/zulu-openjdk-debian:22-latest"
+            tag: zulu-22
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -40,6 +49,6 @@ jobs:
           push: true
           no-cache: true
           build-args: |-
-            JDK_VERSION=${{ matrix.jdkversion[0] }}
+            JDK_BASE_IMAGE=${{ matrix.jdk.image }}
           tags: |-
-            ghcr.io/${{ env.REPO }}:${{ matrix.jdkversion[1] }}
+            ghcr.io/${{ env.REPO }}:${{ matrix.jdk.tag }}
