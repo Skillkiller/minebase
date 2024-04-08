@@ -11,6 +11,7 @@ This is a batteries-included Docker base image you can use to create your own Mi
 ## How to build the image?
 
 Simply use the image `ghcr.io/zekrotja/minebase` as base image. You can choose between different JDK versions via the tag of the image. Available tags are:
+- `jdk-21`
 - `jdk-17`
 - `jdk-16`
 - `jdk-11`
