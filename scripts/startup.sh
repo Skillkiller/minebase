@@ -3,6 +3,10 @@
 set -e
 source ./scripts/utils.sh
 
+if is_true "$DEBUG_MODE"; then
+  set -x
+fi
+
 backup() {
   if ./scripts/backup.sh "$1" 2>&1 | tee output.log; then
     notify "$BACKUP_SUCCESS_SCRIPT" "$(cat output.log)"

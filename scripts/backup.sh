@@ -6,6 +6,10 @@ set -e
 
 source ./scripts/utils.sh
 
+if is_true "$DEBUG_MODE"; then
+  set -x
+fi
+
 backup_location="${BACKUP_LOCATION:-/var/mcserver/}"
 
 if [ -f /run/secrets/rcloneconfig ]; then
