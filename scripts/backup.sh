@@ -17,7 +17,7 @@ if [ -f /run/secrets/rcloneconfig ]; then
         echo -e "\n[${CYAN} INFO ${RESET}] Starting backup"
         mkdir -p "$WDIR"
 
-        FILENAME="$1-$(date "${BACKUP_FILE_FORMAT}").zip"
+        FILENAME="$1-$(date +"$(eval echo "${BACKUP_FILE_FORMAT}")").zip"
 
         # Start zipping server
         zip -9rq "${WDIR}/$FILENAME" "$backup_location"
