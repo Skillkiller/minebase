@@ -41,6 +41,9 @@ LABEL maintainer="zekro <contact@zekro.de>" \
 COPY --from=build /build/rcon/target/release/rconcli /usr/bin/rconcli
 RUN chmod +x /usr/bin/rconcli
 
+COPY --from=build /build/restic /usr/bin/restic
+RUN chmod +x /usr/bin/restic
+
 COPY --from=healthcheck-build /build/healthcheck /usr/bin/healthcheck
 # 90 Retries * 10s -> 15 Minutes Startup Time Assumption
 HEALTHCHECK --interval=10s --timeout=10s --retries=90 \
