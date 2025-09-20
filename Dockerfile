@@ -22,6 +22,14 @@ RUN git clone https://github.com/zekroTJA/rconcli \
     --branch main --depth 1 .
 RUN cargo build --release 
 
+# --- DOWNLOAD AND VERIFY RESTIC -------------------------------------------------------------------
+FROM alpine:3.20 AS restic
+WORKDIR /build/
+
+RUN wget -O restic.bz2 "https://github.com/restic/restic/releases/download/v0.18.0/restic_0.18.0_linux_amd64.bz2"
+RUN echo "98f6dd8bf5b59058d04bfd8dab58e196cc2a680666ccee90275a3b722374438e restic.bz2" | sha256sum -c -
+RUN bunzip2 restic.bz2
+
 # --- FINAL IMAGE STAGE ----------------------------------------------------------------------------
 
 FROM ${JDK_BASE_IMAGE} AS final
