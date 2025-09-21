@@ -1,6 +1,7 @@
 ARG JDK_BASE_IMAGE="openjdk:21-jdk-bullseye"
 ARG RUST_VERSION_TAG="1-buster"
 ARG GOLANG_VERSION_TAG="1-bookworm"
+ARG ALPINE_VERSION_TAG=3.22
 
 # --- BUILD HEALTHCHECK TOOL STAGE -----------------------------------------------------------------
 
@@ -23,7 +24,7 @@ RUN git clone https://github.com/zekroTJA/rconcli \
 RUN cargo build --release 
 
 # --- DOWNLOAD AND VERIFY RESTIC -------------------------------------------------------------------
-FROM alpine:3.20 AS restic
+FROM alpine:${ALPINE_VERSION_TAG} AS restic
 WORKDIR /build/
 
 RUN wget -O restic.bz2 "https://github.com/restic/restic/releases/download/v0.18.0/restic_0.18.0_linux_amd64.bz2"
