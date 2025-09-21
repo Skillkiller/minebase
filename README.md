@@ -12,6 +12,13 @@ This is a batteries-included Docker base image you can use to create your own Mi
 
 Simply use the image `ghcr.io/zekrotja/minebase` as base image. You can choose between different JDK versions via the tag of the image. Available tags are:
 
+### Amazon Corretto ([hub.docker.com/_/amazoncorretto](https://hub.docker.com/_/amazoncorretto))
+- `amazoncorretto-25`
+- `amazoncorretto-21`
+- `amazoncorretto-17`
+- `amazoncorretto-11`
+- `amazoncorretto-8`
+
 ### OpenJDK ([hub.docker.com/openjdk](https://hub.docker.com/_/openjdk))
 - `jdk-21`
 - `jdk-17`
