@@ -31,6 +31,16 @@ jobs:
             tag: zulu-21
           - image: "azul/zulu-openjdk-debian:22-latest"
             tag: zulu-22
+          - image: "amazoncorretto:8"
+            tag: amazoncorretto-8
+          - image: "amazoncorretto:11"
+            tag: amazoncorretto-11
+          - image: "amazoncorretto:17"
+            tag: amazoncorretto-17
+          - image: "amazoncorretto:21"
+            tag: amazoncorretto-21
+          - image: "amazoncorretto:25"
+            tag: amazoncorretto-25
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
