@@ -19,17 +19,21 @@ Simply use the image `ghcr.io/zekrotja/minebase` as base image. You can choose b
 - `amazoncorretto-11`
 - `amazoncorretto-8`
 
-### OpenJDK ([hub.docker.com/openjdk](https://hub.docker.com/_/openjdk))
+### Azul Zulu OpenJDK ([hub.docker.com/azul/zulu-openjdk-debian](https://hub.docker.com/r/azul/zulu-openjdk-debian))
+- `zulu-17`
+- `zulu-21`
+- `zulu-22`
+
+### (**Deprecated**) OpenJDK ([hub.docker.com/openjdk](https://hub.docker.com/_/openjdk))
+
+> [!CAUTION]
+> These versions are deprecated. [See for more information](https://hub.docker.com/_/openjdk#deprecation-notice).
+
 - `jdk-21`
 - `jdk-17`
 - `jdk-16`
 - `jdk-11`
 - `jdk-8`
-
-### Azul Zulu OpenJDK ([hub.docker.com/azul/zulu-openjdk-debian](https://hub.docker.com/r/azul/zulu-openjdk-debian))
-- `zulu-17`
-- `zulu-21`
-- `zulu-22`
 
 Then, you need to create a `run.sh`, which contains the script to start the Minecraft server. It must be placed in the `/var/mcserver/scripts` directory of the image.
 
