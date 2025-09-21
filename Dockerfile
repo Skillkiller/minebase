@@ -41,7 +41,7 @@ LABEL maintainer="zekro <contact@zekro.de>" \
 COPY --from=build /build/rcon/target/release/rconcli /usr/bin/rconcli
 RUN chmod +x /usr/bin/rconcli
 
-COPY --from=build /build/restic /usr/bin/restic
+COPY --from=restic /build/restic /usr/bin/restic
 RUN chmod +x /usr/bin/restic
 
 COPY --from=healthcheck-build /build/healthcheck /usr/bin/healthcheck
