@@ -15,11 +15,21 @@ backup_rclone() {
   fi
 }
 
+backup_restic() {
+  if ./scripts/backup_restic.sh "$1" 2>&1 | tee output.log; then
+    notify "$BACKUP_SUCCESS_SCRIPT" "$(cat output.log)"
+  else
+    notify "$BACKUP_FAILED_SCRIPT" "$(cat output.log)"
+  fi
+}
+
+
 BUILD_SCRIPT=$(realpath ./scripts/build.sh)
 RUN_SCRIPT=$(realpath ./scripts/run.sh)
 
 ./scripts/information.sh
 is_true "$PRE_START_BACKUP" && backup_rclone "pre" &
+is_true "$PRE_START_BACKUP_RESTIC" && backup_restic "pre"
 
 if [ -f "$BUILD_SCRIPT" ]; then 
   "$BUILD_SCRIPT"
@@ -35,3 +45,4 @@ else
 fi
 
 is_true "$POST_START_BACKUP" && backup_rclone "post"
+is_true "$POST_START_BACKUP_RESTIC" && backup_restic "post"
