@@ -27,8 +27,12 @@ RUN cargo build --release
 FROM alpine:${ALPINE_VERSION_TAG} AS restic
 WORKDIR /build/
 
-RUN wget -O restic.bz2 "https://github.com/restic/restic/releases/download/v0.18.0/restic_0.18.0_linux_amd64.bz2"
-RUN echo "98f6dd8bf5b59058d04bfd8dab58e196cc2a680666ccee90275a3b722374438e restic.bz2" | sha256sum -c -
+# Pin binary file to a specific version
+ARG RESTIC_SHA256="98f6dd8bf5b59058d04bfd8dab58e196cc2a680666ccee90275a3b722374438e"
+ARG RESTIC_URL="https://github.com/restic/restic/releases/download/v0.18.0/restic_0.18.0_linux_amd64.bz2"
+
+RUN wget -O restic.bz2 "$RESTIC_URL"
+RUN echo "${RESTIC_SHA256} restic.bz2" | sha256sum -c -
 RUN bunzip2 restic.bz2
 
 # --- FINAL IMAGE STAGE ----------------------------------------------------------------------------
