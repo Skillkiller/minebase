@@ -76,4 +76,4 @@ else
 fi
 
 
-backup_restic
+backup_restic "$1"
