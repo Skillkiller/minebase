@@ -26,7 +26,7 @@ if [ ! -d "$backup_location" ]; then
     exit 0
 fi
 
-check_restic_repo() {
+is_repo_initialized() {
     if restic cat config >/dev/null 2>&1; then
         return 0
     else
@@ -36,7 +36,7 @@ check_restic_repo() {
 
 init_restic_repo() {
     set +e
-    if ! check_restic_repo; then
+    if ! is_repo_initialized; then
         echo -e "\n[${CYAN} INFO ${RESET}] Initializing Restic repository..."
         if restic init; then
             echo -e "\n[${CYAN} INFO ${RESET}] Repository successfully initialized"
