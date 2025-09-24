@@ -34,7 +34,7 @@ is_repo_initialized() {
     fi
 }
 
-init_restic_repo() {
+init_restic_repo_unless_exists() {
     set +e
     if ! is_repo_initialized; then
         echo -e "\n[${CYAN} INFO ${RESET}] Initializing Restic repository..."
@@ -65,7 +65,7 @@ backup_restic() {
 
 
 if ! is_true "$BACKUP_RESTIC_SKIP_INIT"; then
-    init_restic_repo
+    init_restic_repo_unless_exists
 else
     echo -e "[${CYAN} INFO ${RESET}] Skipping Restic repository initialization"
 fi
