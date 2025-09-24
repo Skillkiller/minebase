@@ -26,9 +26,6 @@ if [ ! -d "$backup_location" ]; then
     exit 0
 fi
 
-
-
-# Check if repo is not initialized
 check_restic_repo() {
     if restic cat config >/dev/null 2>&1; then
         return 0
@@ -66,8 +63,6 @@ backup_restic() {
     fi
 }
 
-
-# Script start
 
 if ! is_true "$BACKUP_RESTIC_SKIP_INIT"; then
     init_restic_repo
