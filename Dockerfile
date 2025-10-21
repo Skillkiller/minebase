@@ -1,11 +1,17 @@
-ARG JDK_BASE_IMAGE="openjdk:21-jdk-bullseye"
-ARG RUST_VERSION_TAG="1-buster"
+ARG GOLANG_BASE_IMAGE="golang"
 ARG GOLANG_VERSION_TAG="1-bookworm"
-ARG ALPINE_VERSION_TAG=3.22
+
+ARG RUST_BASE_IMAGE="rust"
+ARG RUST_VERSION_TAG="1-buster"
+
+ARG ALPINE_BASE_IMAGE="alpine"
+ARG ALPINE_VERSION_TAG="alpine:3"
+
+ARG JDK_BASE_IMAGE="openjdk:21-jdk-bullseye"
 
 # --- BUILD HEALTHCHECK TOOL STAGE -----------------------------------------------------------------
 
-FROM golang:${GOLANG_VERSION_TAG} AS healthcheck-build
+FROM ${GOLANG_BASE_IMAGE}:${GOLANG_VERSION_TAG} AS healthcheck-build
 WORKDIR /build
 
 ENV CGO_ENABLED=0
@@ -16,7 +22,7 @@ RUN go build -v -o healthcheck ./cmd/healthcheck/main.go
 
 # --- BUILD RCON CLIENT ----------------------------------------------------------------------------
 
-FROM rust:${RUST_VERSION_TAG} AS build
+FROM ${RUST_BASE_IMAGE}:${RUST_VERSION_TAG} AS build
 WORKDIR /build/rcon
 
 RUN git clone https://github.com/zekroTJA/rconcli \
@@ -24,7 +30,7 @@ RUN git clone https://github.com/zekroTJA/rconcli \
 RUN cargo build --release 
 
 # --- DOWNLOAD AND VERIFY RESTIC -------------------------------------------------------------------
-FROM alpine:${ALPINE_VERSION_TAG} AS restic
+FROM ${ALPINE_BASE_IMAGE}:${ALPINE_VERSION_TAG} AS restic
 WORKDIR /build/
 
 # Pin binary file to a specific version
