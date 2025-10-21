@@ -92,4 +92,4 @@ RUN chmod +x ./scripts/*.sh /usr/bin/rcon
 
 EXPOSE 25565 25575
 
-CMD ./scripts/startup.sh
+CMD ["/var/mcserver/scripts/startup.sh"]
