@@ -34,8 +34,8 @@ FROM ${ALPINE_BASE_IMAGE}:${ALPINE_VERSION_TAG} AS restic
 WORKDIR /build/
 
 # Pin binary file to a specific version
-ARG RESTIC_SHA256="98f6dd8bf5b59058d04bfd8dab58e196cc2a680666ccee90275a3b722374438e"
-ARG RESTIC_URL="https://github.com/restic/restic/releases/download/v0.18.0/restic_0.18.0_linux_amd64.bz2"
+ARG RESTIC_SHA256="680838f19d67151adba227e1570cdd8af12c19cf1735783ed1ba928bc41f363d"
+ARG RESTIC_URL="https://github.com/restic/restic/releases/download/v0.18.1/restic_0.18.1_linux_amd64.bz2"
 
 RUN wget -O restic.bz2 "$RESTIC_URL"
 RUN echo "${RESTIC_SHA256} restic.bz2" | sha256sum -c -
